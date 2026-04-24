@@ -3,10 +3,12 @@ from __future__ import annotations
 import json
 import re
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
+
+import tiktoken
 
 from agent.graph import MultiMemoryAgent
 
@@ -14,8 +16,14 @@ from agent.graph import MultiMemoryAgent
 def _estimate_tokens(text: str) -> int:
 	if not text.strip():
 		return 0
-	units = re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
-	return max(1, int(len(units) * 1.1))
+	try:
+		# Sử dụng tiktoken để đếm token chuẩn xác thay vì đếm chữ
+		encoding = tiktoken.encoding_for_model("gpt-4o-mini")
+		return len(encoding.encode(text))
+	except Exception:
+		# Fallback an toàn nếu có lỗi thư viện
+		units = re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
+		return max(1, int(len(units) * 1.1))
 
 
 def _safe_divide(numerator: float, denominator: float) -> float:
@@ -82,11 +90,8 @@ class MetricAccumulator:
 	prompt_tokens: int = 0
 	response_tokens: int = 0
 
-	token_budget: Dict[str, int] = None
-
-	def __post_init__(self) -> None:
-		if self.token_budget is None:
-			self.token_budget = defaultdict(int)
+	# Fix lỗi Pylance bằng cách dùng field factory chuẩn của Python Dataclasses
+	token_budget: Dict[str, int] = field(default_factory=lambda: defaultdict(int))
 
 
 def _keyword_match_score(response: str, expected_keywords: List[str]) -> tuple[int, float]:
@@ -306,4 +311,3 @@ def run_benchmark(
 	_generate_report(output_path=report_file, result_payload=result_payload)
 
 	return result_payload
-

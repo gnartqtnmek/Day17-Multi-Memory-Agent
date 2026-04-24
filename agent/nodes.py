@@ -4,8 +4,12 @@ import re
 from dataclasses import dataclass
 from typing import Any, Dict, List, Tuple
 
+import tiktoken
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import HumanMessage, SystemMessage
+
 from agent.router import MemoryRouter
-from agent.state import AgentState, default_token_budget
+from agent.state import AgentState, default_token_budget, TokenBudget
 from memory import EpisodicMemory, LongTermMemory, SemanticMemory, ShortTermMemory
 
 
@@ -40,23 +44,37 @@ class AgentNodes:
 		self.response_token_reserve = response_token_reserve
 		self.recent_turn_limit = recent_turn_limit
 
+		# Khởi tạo LLM cho việc sinh câu trả lời
+		self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
+
 		self.system_instruction = (
-			"Ban la tro ly da ket noi voi full memory stack. "
-			"Hay uu tien thong tin theo 4 cap: "
-			"P1=system guardrail, P2=truy van hien tai + recent turns, "
-			"P3=routed memory snippets, P4=older context."
+			"Bạn là trợ lý AI thông minh được kết nối với hệ thống Multi-Memory. "
+			"Dưới đây là các ngữ cảnh được trích xuất từ bộ nhớ của bạn theo mức độ ưu tiên:\n"
+			"- [P1]: Chỉ thị hệ thống.\n"
+			"- [P2]: Ngữ cảnh trò chuyện gần đây.\n"
+			"- [P3]: Các đoạn ký ức được truy xuất (Sở thích, Lịch sử, Kiến thức).\n"
+			"- [P4]: Lịch sử trò chuyện cũ hơn.\n\n"
+			"Hãy luôn sử dụng thông tin từ bộ nhớ để trả lời người dùng một cách tự nhiên, "
+			"ngắn gọn, và trực tiếp. Nếu thông tin mâu thuẫn, hãy ưu tiên thông tin mới nhất."
 		)
 
 	def _estimate_tokens(self, text: str) -> int:
+		"""Sử dụng tiktoken để đếm token chuẩn xác thay vì đếm chữ."""
 		if not text.strip():
 			return 0
-		units = re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
-		return max(1, int(len(units) * 1.1))
+		try:
+			encoding = tiktoken.encoding_for_model("gpt-4o-mini")
+			return len(encoding.encode(text))
+		except Exception:
+			# Fallback trong trường hợp không load được tiktoken
+			units = re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
+			return max(1, int(len(units) * 1.1))
 
 	def _truncate_to_tokens(self, text: str, max_tokens: int) -> str:
 		if max_tokens <= 0:
 			return ""
 
+		# Đoạn này vẫn dùng split() để cắt chuỗi tạm, nhưng token đếm chuẩn hơn
 		words = text.split()
 		if len(words) <= max_tokens:
 			return text
@@ -73,13 +91,14 @@ class AgentNodes:
 			lines.append(f"Assistant: {assistant_message}")
 		return "\n".join(lines)
 
-	def _auto_trim(self, blocks: List[ContextBlock]) -> tuple[str, Dict[str, int]]:
+	def _auto_trim(self, blocks: List[ContextBlock]) -> tuple[str, TokenBudget]:
 		budget_limit = max(64, self.token_limit - self.response_token_reserve)
 		budget = default_token_budget()
 		budget["budget_limit"] = budget_limit
 		used_tokens = 0
 		kept_sections: List[str] = []
 
+		# Cắt tỉa theo mức độ ưu tiên từ P1 đến P4
 		for priority in [1, 2, 3, 4]:
 			for block in [item for item in blocks if item.priority == priority and item.content.strip()]:
 				block_tokens = self._estimate_tokens(block.content)
@@ -109,7 +128,7 @@ class AgentNodes:
 		return "\n\n".join(kept_sections), budget
 
 	def route_query(self, state: AgentState) -> Dict[str, Any]:
-		route = self.router.route(state["query"])
+		route = self.router.route(state.get("query", ""))
 		return {
 			"route": route.name,
 			"route_reason": route.reason,
@@ -118,7 +137,7 @@ class AgentNodes:
 
 	def retrieve_context(self, state: AgentState) -> Dict[str, Any]:
 		user_id = state.get("user_id", "default")
-		query = state["query"]
+		query = (state.get("query", ""))
 		route = state.get("route", "short_term")
 
 		all_recent_turns = self.short_term.get_recent_turns(limit=max(20, self.recent_turn_limit))
@@ -188,70 +207,32 @@ class AgentNodes:
 			},
 		}
 
-	def _respond_with_long_term(self, query: str, items: List[str], user_id: str) -> str:
-		extracted = self.long_term.extract_preferences(query)
-		if extracted:
-			joined = "; ".join(f"{key}={value}" for key, value in extracted.items())
-			return f"Mình đã ghi nhớ sở thích của bạn vào long-term memory: {joined}."
-
-		if items:
-			return "Theo long-term memory, mình nhớ các thông tin sau: " + "; ".join(items)
-
-		fallback = self.long_term.get_preferences(user_id)
-		if fallback:
-			joined = "; ".join(f"{key}: {value}" for key, value in fallback.items())
-			return f"Mình truy xuất long-term memory và có các mục: {joined}."
-
-		return "Mình chưa có dữ liệu sở thích nào trong long-term memory cho bạn."
-
-	def _respond_with_episodic(self, items: List[str]) -> str:
-		if not items:
-			return "Mình chưa tìm được episode liên quan trong nhật ký hội thoại."
-
-		lead = items[0]
-		return f"Từ episodic log, lượt hội thoại gần nhất liên quan là: {lead}"
-
-	def _respond_with_semantic(self, items: List[str]) -> str:
-		if not items:
-			return "Semantic memory hiện chưa có tài liệu phù hợp cho câu hỏi này."
-
-		top = items[0]
-		if len(items) > 1:
-			return f"Theo semantic memory: {top} Ngoài ra, mình còn thấy: {items[1]}"
-		return f"Theo semantic memory: {top}"
-
-	def _respond_with_short_term(self, query: str, short_term_turns: List[Dict[str, str]]) -> str:
-		if not short_term_turns:
-			return (
-				"Mình đã nhận câu hỏi của bạn. Hiện chưa có nhiều ngữ cảnh trước đó, "
-				"bạn có thể cung cấp thêm chi tiết để mình hỗ trợ tốt hơn."
-			)
-
-		previous_topic = short_term_turns[-1]["user"]
-		return (
-			"Mình đang bám theo short-term context. "
-			f"Lượt trước bạn hỏi: '{previous_topic}'. "
-			f"Với câu hiện tại '{query}', mình đề xuất tiếp tục làm rõ mục tiêu cụ thể."
-		)
-
 	def generate_response(self, state: AgentState) -> Dict[str, Any]:
-		route = state.get("route", "short_term")
-		query = state["query"]
-		user_id = state.get("user_id", "default")
+		"""Sử dụng trực tiếp LLM để sinh câu trả lời tự nhiên thay vì Hardcode."""
+		query = (state.get("query", ""))
+		context_text = state.get("context_text", "")
 
-		if route == "long_term":
-			response = self._respond_with_long_term(query, state.get("long_term_items", []), user_id)
-		elif route == "episodic":
-			response = self._respond_with_episodic(state.get("episodic_items", []))
-		elif route == "semantic":
-			response = self._respond_with_semantic(state.get("semantic_items", []))
-		else:
-			response = self._respond_with_short_term(query, state.get("short_term_turns", []))
+		# Ép LLM trả lời dựa trên ngữ cảnh đã gom và trim từ 4 loại memory
+		messages = [
+			SystemMessage(content=context_text),
+			HumanMessage(content=query)
+		]
 
+		# Gọi LLM
+		ai_msg = self.llm.invoke(messages)
+		response = str(ai_msg.content)
+
+		# Tính toán token usage chính xác
 		token_usage = dict(state.get("token_usage", {}))
 		prompt_tokens = token_usage.get("prompt_tokens", 0)
 		response_tokens = self._estimate_tokens(response)
 
+		# Ưu tiên lấy token đếm chuẩn từ siêu dữ liệu API nếu có
+		if hasattr(ai_msg, "usage_metadata") and ai_msg.usage_metadata:
+			prompt_tokens = ai_msg.usage_metadata.get("input_tokens", prompt_tokens)
+			response_tokens = ai_msg.usage_metadata.get("output_tokens", response_tokens)
+
+		token_usage["prompt_tokens"] = prompt_tokens
 		token_usage["response_tokens"] = response_tokens
 		token_usage["total_tokens"] = prompt_tokens + response_tokens
 
@@ -274,11 +255,12 @@ class AgentNodes:
 
 	def persist_memory(self, state: AgentState) -> Dict[str, Any]:
 		user_id = state.get("user_id", "default")
-		query = state["query"]
-		response = state["response"]
+		query = (state.get("query", ""))
+		response = (state.get("query", ""))
 		route = state.get("route", "short_term")
 
 		stored_preferences = self.long_term.update_from_user_message(user_id=user_id, message=query)
+		
 		semantic_fact = self._extract_semantic_fact(query)
 		if semantic_fact:
 			doc_id = f"user_fact_{user_id}_{abs(hash(semantic_fact))}"
@@ -309,4 +291,3 @@ class AgentNodes:
 			"stored_preferences": stored_preferences,
 			"ingested_semantic_fact": semantic_fact,
 		}
-

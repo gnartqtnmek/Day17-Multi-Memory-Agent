@@ -2,24 +2,43 @@ from __future__ import annotations
 
 import re
 from collections import defaultdict
-from typing import Dict, List, Tuple
+from typing import Dict, List, Mapping, Protocol, Tuple, cast
+
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from pydantic import BaseModel, Field
 
 try:
 	import redis
-	from redis.exceptions import RedisError
-except Exception:  # pragma: no cover - graceful fallback when redis is unavailable
+except Exception:
 	redis = None
-
-	class RedisError(Exception):
-		pass
 
 
 def _tokenize(text: str) -> List[str]:
 	return re.findall(r"\w+", text.lower())
 
 
+class FactExtraction(BaseModel):
+	key: str = Field(description="Loại thông tin (vd: allergy, favorite_drink, tech_stack, goal)")
+	value: str = Field(description="Giá trị của thông tin (vd: đậu nành, cà phê, Python)")
+	action: str = Field(description="Hành động: 'UPSERT' (lưu mới hoặc đè lên cũ) hoặc 'DELETE' (xóa bỏ thông tin)")
+
+class FactList(BaseModel):
+	facts: List[FactExtraction]
+
+
+class _RedisClient(Protocol):
+	def ping(self) -> object: ...
+
+	def hgetall(self, name: str) -> Mapping[str, str] | Mapping[bytes, bytes]: ...
+
+	def hset(self, name: str, mapping: Mapping[str, str]) -> object: ...
+
+	def hdel(self, name: str, *keys: str) -> object: ...
+
+
 class LongTermMemory:
-	"""Long-term memory via Redis with an in-process fallback map."""
+	"""Long-term memory via Redis with an in-process fallback map, powered by LLM extraction."""
 
 	def __init__(
 		self,
@@ -28,46 +47,27 @@ class LongTermMemory:
 	) -> None:
 		self._namespace = namespace
 		self._local_store: Dict[str, Dict[str, str]] = defaultdict(dict)
-		self._client = None
+		self._client: _RedisClient | None = None
+
+		self.llm = ChatOpenAI(model="gpt-4o-mini", temperature=0).with_structured_output(FactList)
 
 		if redis is None:
 			return
 
 		try:
-			client = redis.Redis.from_url(redis_url, decode_responses=True)
+			client = cast(_RedisClient, redis.Redis.from_url(redis_url, decode_responses=True))
 			client.ping()
 			self._client = client
-		except RedisError:
+		except Exception:
 			self._client = None
 
 	def _redis_key(self, user_id: str) -> str:
 		return f"{self._namespace}:user:{user_id}:preferences"
 
-	def _merge_value(self, old_value: str | None, new_value: str) -> str:
-		cleaned_new = new_value.strip()
-		if not old_value:
-			return cleaned_new
-
-		old_parts = [part.strip() for part in old_value.split(";") if part.strip()]
-		if cleaned_new in old_parts:
-			return old_value
-		old_parts.append(cleaned_new)
-		return "; ".join(old_parts)
-
-	def set_preference(self, user_id: str, key: str, value: str) -> None:
-		if self._client is not None:
-			redis_key = self._redis_key(user_id)
-			old_value = self._client.hget(redis_key, key)
-			merged_value = self._merge_value(old_value, value)
-			self._client.hset(redis_key, mapping={key: merged_value})
-			return
-
-		old_value = self._local_store[user_id].get(key)
-		self._local_store[user_id][key] = self._merge_value(old_value, value)
-
 	def get_preferences(self, user_id: str) -> Dict[str, str]:
 		if self._client is not None:
-			return dict(self._client.hgetall(self._redis_key(user_id)))
+			raw_preferences = self._client.hgetall(self._redis_key(user_id))
+			return {str(key): str(value) for key, value in raw_preferences.items()}
 		return dict(self._local_store[user_id])
 
 	def search_preferences(self, user_id: str, query: str, limit: int = 5) -> List[str]:
@@ -90,46 +90,53 @@ class LongTermMemory:
 
 		return [f"{key}: {value}" for key, value in list(preferences.items())[:limit]]
 
-	def _infer_preference_key(self, value: str) -> str:
-		normalized = value.lower()
-
-		if any(word in normalized for word in ["coffee", "cà phê", "trà", "tea", "drink", "đồ uống"]):
-			return "favorite_drink"
-		if any(word in normalized for word in ["book", "sách", "read", "đọc"]):
-			return "favorite_book"
-		if any(word in normalized for word in ["movie", "film", "phim", "series"]):
-			return "favorite_movie"
-		if any(word in normalized for word in ["framework", "python", "java", "langgraph", "tool"]):
-			return "favorite_tech"
-		return "general_preference"
-
-	def extract_preferences(self, message: str) -> Dict[str, str]:
-		patterns = [
-			r"(?:tôi|toi|mình|minh)\s+thích\s+(?P<value>.+)",
-			r"(?:sở thích của tôi là|so thich cua toi la)\s+(?P<value>.+)",
-			r"i\s+like\s+(?P<value>.+)",
-			r"my\s+favorite\s+.+?\s+is\s+(?P<value>.+)",
-			r"hãy nhớ rằng tôi thích\s+(?P<value>.+)",
-			r"hay nho rang toi thich\s+(?P<value>.+)",
-		]
-
-		extracted: Dict[str, str] = {}
-		for pattern in patterns:
-			match = re.search(pattern, message, flags=re.IGNORECASE)
-			if not match:
-				continue
-			value = match.group("value").strip(" .,!?")
-			if not value:
-				continue
-			key = self._infer_preference_key(value)
-			extracted[key] = value
-			break
-
-		return extracted
-
 	def update_from_user_message(self, user_id: str, message: str) -> Dict[str, str]:
-		extracted = self.extract_preferences(message)
-		for key, value in extracted.items():
-			self.set_preference(user_id, key, value)
-		return extracted
+		"""
+		Sử dụng LLM để đối chiếu ngữ cảnh hiện tại và cập nhật thông minh (Upsert/Delete).
+		Thay thế hoàn toàn logic Regex cũ để xử lý được các ca khó (Conflict Handling).
+		"""
+		current_profile = self.get_preferences(user_id)
+		if current_profile:
+			current_context = "\n".join([f"- {k}: {v}" for k, v in current_profile.items()])
+		else:
+			current_context = "Chưa có thông tin nào."
 
+		prompt = ChatPromptTemplate.from_messages([
+			("system", 
+			 "Bạn là chuyên gia trích xuất dữ liệu cá nhân từ hội thoại.\n"
+			 "Profile hiện tại của user:\n{profile}\n\n"
+			 "Nhiệm vụ: Phân tích câu nói của user để tìm các fact, sở thích hoặc thông tin cá nhân cần nhớ dài hạn.\n"
+			 "- Nếu user cung cấp thông tin mới, HOẶC cung cấp thông tin phủ định/thay thế thông tin cũ, hãy đặt action='UPSERT'.\n"
+			 "- Nếu user yêu cầu quên hoặc xóa một thông tin, hãy đặt action='DELETE'.\n"
+			 "Trả về rỗng nếu câu nói không chứa thông tin cần nhớ dài hạn."
+			),
+			("human", "{message}")
+		])
+
+		try:
+			extracted_raw = self.llm.invoke(prompt.format(profile=current_context, message=message))
+			extracted_facts = FactList.model_validate(extracted_raw)
+		except Exception as e:
+			print(f"[LongTermMemory] LLM Extraction Error: {e}")
+			return {}
+
+		updates: Dict[str, str] = {}
+		if not extracted_facts or not extracted_facts.facts:
+			return updates
+
+		for fact in extracted_facts.facts:
+			if fact.action == "UPSERT":
+				if self._client:
+					self._client.hset(self._redis_key(user_id), mapping={fact.key: fact.value})
+				else:
+					self._local_store[user_id][fact.key] = fact.value
+				updates[fact.key] = fact.value
+				
+			elif fact.action == "DELETE":
+				if self._client:
+					self._client.hdel(self._redis_key(user_id), fact.key)
+				else:
+					self._local_store[user_id].pop(fact.key, None)
+				updates[fact.key] = "[DELETED]"
+
+		return updates
