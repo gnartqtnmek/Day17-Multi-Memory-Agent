@@ -1,0 +1,22 @@
+# --- Core Framework ---
+langchain>=0.1.0
+langchain-core>=0.1.40
+langgraph>=0.0.30
+
+# --- LLM Providers ---
+langchain-openai>=0.1.0
+
+# --- Memory Backends ---
+# Long-term Memory
+redis>=5.0.0
+
+# Semantic Memory (Vector DB)
+chromadb>=0.4.22
+sentence-transformers>=2.6.0
+
+# --- Token Management ---
+tiktoken>=0.6.0
+
+# --- Utilities ---
+python-dotenv>=1.0.1
+pydantic>=2.0.0
