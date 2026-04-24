@@ -19,10 +19,10 @@ class HashEmbeddingFunction:
 	def __init__(self, dimensions: int = 256) -> None:
 		self.dimensions = dimensions
 
-	def __call__(self, texts: List[str]) -> List[List[float]]:
+	def __call__(self, input: List[str]) -> List[List[float]]:
 		vectors: List[List[float]] = []
 
-		for text in texts:
+		for text in input:
 			vector = [0.0] * self.dimensions
 			tokens = _tokenize(text)
 
@@ -112,6 +112,26 @@ class SemanticMemory:
 					"id": "k8",
 					"text": "Response relevance danh gia muc do cau tra loi khop voi y dinh va keyword mong doi.",
 					"metadata": {"topic": "benchmark"},
+				},
+				{
+					"id": "k9",
+					"text": "Short-term memory trong lab nay duoc cai dat bang ConversationBufferMemory.",
+					"metadata": {"topic": "short_term"},
+				},
+				{
+					"id": "k10",
+					"text": "Episodic memory duoc luu tren file JSON de ghi log theo tung turn.",
+					"metadata": {"topic": "episodic"},
+				},
+				{
+					"id": "k11",
+					"text": "Memory router phan tich intent cua truy van de chon backend phu hop nhu long-term, episodic hoac semantic.",
+					"metadata": {"topic": "router"},
+				},
+				{
+					"id": "k12",
+					"text": "Khi token gan cham nguong, he thong auto-trim theo uu tien P1 den P4 de toi uu context window.",
+					"metadata": {"topic": "auto_trim"},
 				},
 			]
 		)

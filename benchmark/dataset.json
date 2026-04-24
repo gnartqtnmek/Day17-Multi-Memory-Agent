@@ -1,0 +1,191 @@
+{
+	"conversations": [
+		{
+			"id": "conv01_preference_drink",
+			"turns": [
+				{
+					"user": "Toi thich ca phe arabica va tra sen."
+				},
+				{
+					"user": "Ban nho so thich do uong cua minh khong?",
+					"expected_route": "long_term",
+					"expected_keywords": ["ca phe arabica", "tra sen"]
+				},
+				{
+					"user": "Goi y nhanh dua tren so thich do.",
+					"expected_route": "long_term",
+					"expected_keywords": ["ca phe arabica", "tra sen"]
+				}
+			]
+		},
+		{
+			"id": "conv02_preference_tech",
+			"turns": [
+				{
+					"user": "Minh thich LangGraph va Python."
+				},
+				{
+					"user": "So thich cong nghe cua toi la gi?",
+					"expected_route": "long_term",
+					"expected_keywords": ["langgraph", "python"]
+				},
+				{
+					"user": "Ban nho minh thich framework nao?",
+					"expected_route": "long_term",
+					"expected_keywords": ["langgraph"]
+				}
+			]
+		},
+		{
+			"id": "conv03_episodic_learning_plan",
+			"turns": [
+				{
+					"user": "Tuan nay minh muon hoc Redis co ban."
+				},
+				{
+					"user": "Hay nhac lai minh vua noi muon hoc gi.",
+					"expected_route": "episodic",
+					"expected_keywords": ["redis"]
+				},
+				{
+					"user": "Luc nay toi de cap thoi gian nao?",
+					"expected_route": "episodic",
+					"expected_keywords": ["tuan nay"]
+				}
+			]
+		},
+		{
+			"id": "conv04_semantic_general_knowledge",
+			"turns": [
+				{
+					"user": "Ha Noi la thu do cua nuoc nao?",
+					"expected_route": "semantic",
+					"expected_keywords": ["viet nam"]
+				},
+				{
+					"user": "LangGraph dung de lam gi?",
+					"expected_route": "semantic",
+					"expected_keywords": ["workflow", "graph"]
+				},
+				{
+					"user": "Chroma co vai tro gi?",
+					"expected_route": "semantic",
+					"expected_keywords": ["vector", "semantic"]
+				}
+			]
+		},
+		{
+			"id": "conv05_semantic_benchmark_terms",
+			"turns": [
+				{
+					"user": "Giai thich context window management la gi.",
+					"expected_route": "semantic",
+					"expected_keywords": ["uu tien", "context"]
+				},
+				{
+					"user": "Token budget breakdown thuong gom nhung gi?",
+					"expected_route": "semantic",
+					"expected_keywords": ["system", "recent", "memory", "dropped"]
+				},
+				{
+					"user": "Response relevance dung de do dieu gi?",
+					"expected_route": "semantic",
+					"expected_keywords": ["khop", "keyword"]
+				}
+			]
+		},
+		{
+			"id": "conv06_preference_activity",
+			"turns": [
+				{
+					"user": "Toi thich chay bo buoi sang."
+				},
+				{
+					"user": "Ban nho minh thich hoat dong nao?",
+					"expected_route": "long_term",
+					"expected_keywords": ["chay bo"]
+				},
+				{
+					"user": "Nhac lai so thich do giup minh.",
+					"expected_route": "long_term",
+					"expected_keywords": ["chay bo"]
+				}
+			]
+		},
+		{
+			"id": "conv07_episodic_goal_tracking",
+			"turns": [
+				{
+					"user": "Muc tieu hom nay cua minh la hoan thanh bao cao benchmark."
+				},
+				{
+					"user": "Ban vua nghe minh noi muc tieu gi?",
+					"expected_route": "episodic",
+					"expected_keywords": ["bao cao benchmark"]
+				},
+				{
+					"user": "Luc nay minh co nhac den benchmark dung khong?",
+					"expected_route": "episodic",
+					"expected_keywords": ["benchmark"]
+				}
+			]
+		},
+		{
+			"id": "conv08_semantic_memory_stack",
+			"turns": [
+				{
+					"user": "Redis phu hop cho muc dich gi trong agent memory?",
+					"expected_route": "semantic",
+					"expected_keywords": ["key-value", "dai han"]
+				},
+				{
+					"user": "Short-term memory trong lab nay dung cong cu nao?",
+					"expected_route": "semantic",
+					"expected_keywords": ["conversationbuffermemory"]
+				},
+				{
+					"user": "Episodic memory duoc luu o dau?",
+					"expected_route": "semantic",
+					"expected_keywords": ["json"]
+				}
+			]
+		},
+		{
+			"id": "conv09_mixed_preference_and_knowledge",
+			"turns": [
+				{
+					"user": "Toi thich do an cay."
+				},
+				{
+					"user": "Ban nho khau vi cua minh khong?",
+					"expected_route": "long_term",
+					"expected_keywords": ["do an cay"]
+				},
+				{
+					"user": "Theo kien thuc cua ban, response relevance do gi?",
+					"expected_route": "semantic",
+					"expected_keywords": ["cau tra loi", "keyword"]
+				}
+			]
+		},
+		{
+			"id": "conv10_dynamic_semantic_and_episodic",
+			"turns": [
+				{
+					"user": "Ghi nho kien thuc: Multi-memory agent can router de chon backend phu hop."
+				},
+				{
+					"user": "Router co vai tro gi trong multi-memory agent?",
+					"expected_route": "semantic",
+					"expected_keywords": ["chon backend", "intent"]
+				},
+				{
+					"user": "Luc nay minh da yeu cau ghi nho dieu gi?",
+					"expected_route": "episodic",
+					"expected_keywords": ["router", "backend"]
+				}
+			]
+		}
+	]
+}
+

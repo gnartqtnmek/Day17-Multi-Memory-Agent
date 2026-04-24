@@ -1,17 +1,17 @@
 # --- Core Framework ---
-langchain>=0.1.0
+langchain>=0.2.16
 langchain-core>=0.1.40
-langgraph>=0.0.30
+langgraph>=0.2.35
 
 # --- LLM Providers ---
 langchain-openai>=0.1.0
 
 # --- Memory Backends ---
 # Long-term Memory
-redis>=5.0.0
+redis>=5.0.8
 
 # Semantic Memory (Vector DB)
-chromadb>=0.4.22
+chromadb>=0.5.5
 sentence-transformers>=2.6.0
 
 # --- Token Management ---
