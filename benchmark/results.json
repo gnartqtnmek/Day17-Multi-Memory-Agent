@@ -1,0 +1,1250 @@
+{
+  "generated_at_utc": "2026-04-24T13:11:25.839784+00:00",
+  "dataset_path": "benchmark/dataset.json",
+  "conversation_count": 10,
+  "turn_count": 30,
+  "model_results": {
+    "with_memory": {
+      "turns": 30,
+      "response_relevance": 0.5434782608695652,
+      "context_utilization": 0.9565217391304348,
+      "token_efficiency": 0.001314800901577761,
+      "memory_hit_rate": 1.0,
+      "matched_keywords": 21,
+      "total_expected_keywords": 37,
+      "total_tokens": 15972,
+      "prompt_tokens": 14944,
+      "response_tokens": 1028,
+      "token_budget_breakdown": {
+        "priority_1_kept": 4500,
+        "priority_2_kept": 4561,
+        "priority_3_kept": 1468,
+        "priority_4_kept": 2956,
+        "dropped_tokens": 2694,
+        "budget_limit": 21600
+      }
+    },
+    "without_memory": {
+      "turns": 30,
+      "response_relevance": 0.03260869565217391,
+      "context_utilization": 0.0,
+      "token_efficiency": 0.0019193857965451055,
+      "memory_hit_rate": 0.0,
+      "matched_keywords": 2,
+      "total_expected_keywords": 37,
+      "total_tokens": 1042,
+      "prompt_tokens": 331,
+      "response_tokens": 711,
+      "token_budget_breakdown": {
+        "priority_1_kept": 0,
+        "priority_2_kept": 331,
+        "priority_3_kept": 0,
+        "priority_4_kept": 0,
+        "dropped_tokens": 0,
+        "budget_limit": 331
+      }
+    }
+  },
+  "turn_logs": [
+    {
+      "conversation_id": "conv01_preference_drink",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Toi thich ca phe arabica va tra sen.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "long_term",
+      "memory_hit": false,
+      "response": "Thật tuyệt! Cà phê Arabica nổi tiếng với hương vị nhẹ nhàng và thơm ngon, trong khi trà sen mang lại cảm giác thanh mát và dễ chịu. Bạn thường thưởng thức chúng trong những dịp nào?",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 226,
+        "response_tokens": 50,
+        "total_tokens": 276
+      }
+    },
+    {
+      "conversation_id": "conv01_preference_drink",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Toi thich ca phe arabica va tra sen.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 12,
+        "response_tokens": 18,
+        "total_tokens": 30
+      }
+    },
+    {
+      "conversation_id": "conv01_preference_drink",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Ban nho so thich do uong cua minh khong?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "ca phe arabica",
+        "tra sen"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Bạn thích cà phê Arabica và trà sen.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 258,
+        "response_tokens": 11,
+        "total_tokens": 269
+      }
+    },
+    {
+      "conversation_id": "conv01_preference_drink",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Ban nho so thich do uong cua minh khong?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "ca phe arabica",
+        "tra sen"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 14,
+        "response_tokens": 27,
+        "total_tokens": 41
+      }
+    },
+    {
+      "conversation_id": "conv01_preference_drink",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Goi y nhanh dua tren so thich do.",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "ca phe arabica",
+        "tra sen"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Dựa trên sở thích của bạn, bạn có thể thử kết hợp cà phê Arabica với trà sen để tạo ra một thức uống độc đáo. Hoặc bạn có thể thưởng thức trà sen một mình để tận hưởng hương vị thanh mát.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 284,
+        "response_tokens": 53,
+        "total_tokens": 337
+      }
+    },
+    {
+      "conversation_id": "conv01_preference_drink",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Goi y nhanh dua tren so thich do.",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "ca phe arabica",
+        "tra sen"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 18,
+        "total_tokens": 29
+      }
+    },
+    {
+      "conversation_id": "conv02_preference_tech",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Minh thich LangGraph va Python.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "long_term",
+      "memory_hit": false,
+      "response": "Bạn thích LangGraph và Python. Có điều gì cụ thể bạn muốn thảo luận về chúng không?",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 300,
+        "response_tokens": 21,
+        "total_tokens": 321
+      }
+    },
+    {
+      "conversation_id": "conv02_preference_tech",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Minh thich LangGraph va Python.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 9,
+        "response_tokens": 18,
+        "total_tokens": 27
+      }
+    },
+    {
+      "conversation_id": "conv02_preference_tech",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "So thich cong nghe cua toi la gi?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "langgraph",
+        "python"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Sở thích công nghệ của bạn là LangGraph và Python.",
+      "matched_keywords": 2,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 326,
+        "response_tokens": 13,
+        "total_tokens": 339
+      }
+    },
+    {
+      "conversation_id": "conv02_preference_tech",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "So thich cong nghe cua toi la gi?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "langgraph",
+        "python"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 27,
+        "total_tokens": 37
+      }
+    },
+    {
+      "conversation_id": "conv02_preference_tech",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Ban nho minh thich framework nao?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "langgraph"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Bạn thích framework LangGraph.",
+      "matched_keywords": 1,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 354,
+        "response_tokens": 6,
+        "total_tokens": 360
+      }
+    },
+    {
+      "conversation_id": "conv02_preference_tech",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Ban nho minh thich framework nao?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "langgraph"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 9,
+        "response_tokens": 27,
+        "total_tokens": 36
+      }
+    },
+    {
+      "conversation_id": "conv03_episodic_learning_plan",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Tuan nay minh muon hoc Redis co ban.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Để bắt đầu học Redis cơ bản, bạn có thể tham khảo các bước sau:\n\n1. **Cài đặt Redis**: Tải và cài đặt Redis trên máy tính của bạn. Bạn có thể tìm hướng dẫn cài đặt trên trang chính thức của Redis.\n\n2. **Tài liệu chính thức**: Đọc tài liệu chính thức của Redis để hiểu về các khái niệm cơ bản như key-value store, các loại dữ liệu (strings, lists, sets, hashes, etc.).\n\n3. **Thực hành**: Tạo một số dự án nhỏ để thực hành. Bạn có thể thử lưu trữ và truy xuất dữ liệu đơn giản.\n\n4. **Khóa học trực tuyến**: Tìm kiếm các khóa học trực tuyến trên nền tảng như Udemy, Coursera hoặc YouTube để có hướng dẫn chi tiết hơn.\n\n5. **Tham gia cộng đồng**: Tham gia các diễn đàn hoặc nhóm trên mạng xã hội để trao đổi và học hỏi từ những người khác.\n\nNếu bạn cần thêm thông tin chi tiết về bất kỳ phần nào, hãy cho tôi biết!",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 370,
+        "response_tokens": 229,
+        "total_tokens": 599
+      }
+    },
+    {
+      "conversation_id": "conv03_episodic_learning_plan",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Tuan nay minh muon hoc Redis co ban.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 18,
+        "total_tokens": 29
+      }
+    },
+    {
+      "conversation_id": "conv03_episodic_learning_plan",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Hay nhac lai minh vua noi muon hoc gi.",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "redis"
+      ],
+      "route": "episodic",
+      "memory_hit": true,
+      "response": "Bạn đã nói rằng tuần này bạn muốn học Redis cơ bản.",
+      "matched_keywords": 1,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 430,
+        "response_tokens": 13,
+        "total_tokens": 443
+      }
+    },
+    {
+      "conversation_id": "conv03_episodic_learning_plan",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Hay nhac lai minh vua noi muon hoc gi.",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "redis"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 12,
+        "response_tokens": 18,
+        "total_tokens": 30
+      }
+    },
+    {
+      "conversation_id": "conv03_episodic_learning_plan",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Luc nay toi de cap thoi gian nao?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "tuan nay"
+      ],
+      "route": "episodic",
+      "memory_hit": true,
+      "response": "Tuan nay, bạn muốn học Redis cơ bản.",
+      "matched_keywords": 1,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 454,
+        "response_tokens": 11,
+        "total_tokens": 465
+      }
+    },
+    {
+      "conversation_id": "conv03_episodic_learning_plan",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Luc nay toi de cap thoi gian nao?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "tuan nay"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 27,
+        "total_tokens": 37
+      }
+    },
+    {
+      "conversation_id": "conv04_semantic_general_knowledge",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Ha Noi la thu do cua nuoc nao?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "viet nam"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Hà Nội là thủ đô của Việt Nam.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 515,
+        "response_tokens": 10,
+        "total_tokens": 525
+      }
+    },
+    {
+      "conversation_id": "conv04_semantic_general_knowledge",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Ha Noi la thu do cua nuoc nao?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "viet nam"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 27,
+        "total_tokens": 37
+      }
+    },
+    {
+      "conversation_id": "conv04_semantic_general_knowledge",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "LangGraph dung de lam gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "workflow",
+        "graph"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "LangGraph là framework để xây dựng workflow agent dạng graph với state rõ ràng.",
+      "matched_keywords": 2,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 540,
+        "response_tokens": 17,
+        "total_tokens": 557
+      }
+    },
+    {
+      "conversation_id": "conv04_semantic_general_knowledge",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "LangGraph dung de lam gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "workflow",
+        "graph"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 7,
+        "response_tokens": 27,
+        "total_tokens": 34
+      }
+    },
+    {
+      "conversation_id": "conv04_semantic_general_knowledge",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Chroma co vai tro gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "vector",
+        "semantic"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Chroma là một vector database nguồn mở, được sử dụng để thực hiện semantic search và retrieval.",
+      "matched_keywords": 2,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 576,
+        "response_tokens": 20,
+        "total_tokens": 596
+      }
+    },
+    {
+      "conversation_id": "conv04_semantic_general_knowledge",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Chroma co vai tro gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "vector",
+        "semantic"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 7,
+        "response_tokens": 27,
+        "total_tokens": 34
+      }
+    },
+    {
+      "conversation_id": "conv05_semantic_benchmark_terms",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Giai thich context window management la gi.",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "uu tien",
+        "context"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Context window management là quá trình quản lý thông tin trong một hệ thống để tối ưu hóa việc sử dụng bộ nhớ. Nó bao gồm việc ưu tiên thông tin quan trọng và loại bỏ những thông tin ít giá trị khi số lượng token gần đạt ngưỡng tối đa. Điều này giúp hệ thống duy trì hiệu suất và đảm bảo rằng các thông tin cần thiết vẫn được giữ lại trong bộ nhớ ngắn hạn.",
+      "matched_keywords": 1,
+      "relevance": 0.5,
+      "token_usage": {
+        "prompt_tokens": 596,
+        "response_tokens": 84,
+        "total_tokens": 680
+      }
+    },
+    {
+      "conversation_id": "conv05_semantic_benchmark_terms",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Giai thich context window management la gi.",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "uu tien",
+        "context"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 18,
+        "total_tokens": 28
+      }
+    },
+    {
+      "conversation_id": "conv05_semantic_benchmark_terms",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Token budget breakdown thuong gom nhung gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "system",
+        "recent",
+        "memory",
+        "dropped"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Token budget breakdown thường gồm các thành phần sau: system context, recent turns, memory snippets và dropped tokens. Khi token gần chạm ngưỡng, hệ thống sẽ tự động trim theo ưu tiên từ P1 đến P4 để tối ưu context window.",
+      "matched_keywords": 4,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 624,
+        "response_tokens": 52,
+        "total_tokens": 676
+      }
+    },
+    {
+      "conversation_id": "conv05_semantic_benchmark_terms",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Token budget breakdown thuong gom nhung gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "system",
+        "recent",
+        "memory",
+        "dropped"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 1,
+      "relevance": 0.25,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 27,
+        "total_tokens": 37
+      }
+    },
+    {
+      "conversation_id": "conv05_semantic_benchmark_terms",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Response relevance dung de do dieu gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "khop",
+        "keyword"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Response relevance được sử dụng để đánh giá mức độ câu trả lời khớp với ý định và từ khóa mong đợi của người dùng. Nó giúp đảm bảo rằng thông tin cung cấp là phù hợp và hữu ích cho yêu cầu của người dùng.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 642,
+        "response_tokens": 51,
+        "total_tokens": 693
+      }
+    },
+    {
+      "conversation_id": "conv05_semantic_benchmark_terms",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Response relevance dung de do dieu gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "khop",
+        "keyword"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 8,
+        "response_tokens": 27,
+        "total_tokens": 35
+      }
+    },
+    {
+      "conversation_id": "conv06_preference_activity",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Toi thich chay bo buoi sang.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "long_term",
+      "memory_hit": false,
+      "response": "Bạn thích chạy bộ buổi sáng, thật tuyệt! Chạy bộ là một cách tuyệt vời để khởi đầu ngày mới và giữ gìn sức khỏe. Bạn thường chạy ở đâu?",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 583,
+        "response_tokens": 39,
+        "total_tokens": 622
+      }
+    },
+    {
+      "conversation_id": "conv06_preference_activity",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Toi thich chay bo buoi sang.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 18,
+        "total_tokens": 29
+      }
+    },
+    {
+      "conversation_id": "conv06_preference_activity",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Ban nho minh thich hoat dong nao?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "chay bo"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Bạn thích hoạt động chạy bộ vào buổi sáng.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 621,
+        "response_tokens": 11,
+        "total_tokens": 632
+      }
+    },
+    {
+      "conversation_id": "conv06_preference_activity",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Ban nho minh thich hoat dong nao?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "chay bo"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 27,
+        "total_tokens": 38
+      }
+    },
+    {
+      "conversation_id": "conv06_preference_activity",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Nhac lai so thich do giup minh.",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "chay bo"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Bạn thích chạy bộ vào buổi sáng, cà phê Arabica và trà sen. Bạn cũng thích LangGraph và Python.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 647,
+        "response_tokens": 26,
+        "total_tokens": 673
+      }
+    },
+    {
+      "conversation_id": "conv06_preference_activity",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Nhac lai so thich do giup minh.",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "chay bo"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 18,
+        "total_tokens": 29
+      }
+    },
+    {
+      "conversation_id": "conv07_episodic_goal_tracking",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Muc tieu hom nay cua minh la hoan thanh bao cao benchmark.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Chúc bạn hoàn thành báo cáo benchmark một cách hiệu quả! Nếu cần hỗ trợ gì trong quá trình làm báo cáo, hãy cho tôi biết nhé!",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 671,
+        "response_tokens": 31,
+        "total_tokens": 702
+      }
+    },
+    {
+      "conversation_id": "conv07_episodic_goal_tracking",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Muc tieu hom nay cua minh la hoan thanh bao cao benchmark.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 16,
+        "response_tokens": 18,
+        "total_tokens": 34
+      }
+    },
+    {
+      "conversation_id": "conv07_episodic_goal_tracking",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Ban vua nghe minh noi muc tieu gi?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "bao cao benchmark"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Mục tiêu hôm nay của bạn là hoàn thành báo cáo benchmark.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 761,
+        "response_tokens": 14,
+        "total_tokens": 775
+      }
+    },
+    {
+      "conversation_id": "conv07_episodic_goal_tracking",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Ban vua nghe minh noi muc tieu gi?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "bao cao benchmark"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 27,
+        "total_tokens": 37
+      }
+    },
+    {
+      "conversation_id": "conv07_episodic_goal_tracking",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Luc nay minh co nhac den benchmark dung khong?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "benchmark"
+      ],
+      "route": "episodic",
+      "memory_hit": true,
+      "response": "Đúng rồi, bạn đã nhắc đến benchmark trong mục tiêu hôm nay của mình.",
+      "matched_keywords": 1,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 441,
+        "response_tokens": 18,
+        "total_tokens": 459
+      }
+    },
+    {
+      "conversation_id": "conv07_episodic_goal_tracking",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Luc nay minh co nhac den benchmark dung khong?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "benchmark"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 12,
+        "response_tokens": 27,
+        "total_tokens": 39
+      }
+    },
+    {
+      "conversation_id": "conv08_semantic_memory_stack",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Redis phu hop cho muc dich gi trong agent memory?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "key-value",
+        "dai han"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Redis phù hợp cho lưu trữ key-value với tốc độ cao và bộ nhớ dài hạn của chatbot. Nó giúp quản lý dữ liệu một cách hiệu quả trong các ứng dụng cần truy xuất nhanh và lưu trữ dữ liệu lâu dài.",
+      "matched_keywords": 1,
+      "relevance": 0.5,
+      "token_usage": {
+        "prompt_tokens": 471,
+        "response_tokens": 48,
+        "total_tokens": 519
+      }
+    },
+    {
+      "conversation_id": "conv08_semantic_memory_stack",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Redis phu hop cho muc dich gi trong agent memory?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "key-value",
+        "dai han"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 12,
+        "response_tokens": 27,
+        "total_tokens": 39
+      }
+    },
+    {
+      "conversation_id": "conv08_semantic_memory_stack",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Short-term memory trong lab nay dung cong cu nao?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "conversationbuffermemory"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Short-term memory trong lab này được cài đặt bằng ConversationBufferMemory.",
+      "matched_keywords": 1,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 472,
+        "response_tokens": 15,
+        "total_tokens": 487
+      }
+    },
+    {
+      "conversation_id": "conv08_semantic_memory_stack",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Short-term memory trong lab nay dung cong cu nao?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "conversationbuffermemory"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 27,
+        "total_tokens": 38
+      }
+    },
+    {
+      "conversation_id": "conv08_semantic_memory_stack",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Episodic memory duoc luu o dau?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "json"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Episodic memory được lưu trên file JSON để ghi log theo từng turn.",
+      "matched_keywords": 1,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 469,
+        "response_tokens": 17,
+        "total_tokens": 486
+      }
+    },
+    {
+      "conversation_id": "conv08_semantic_memory_stack",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Episodic memory duoc luu o dau?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "json"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 12,
+        "response_tokens": 27,
+        "total_tokens": 39
+      }
+    },
+    {
+      "conversation_id": "conv09_mixed_preference_and_knowledge",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Toi thich do an cay.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "long_term",
+      "memory_hit": false,
+      "response": "Bạn thích đồ ăn cay! Có món nào bạn đặc biệt yêu thích không?",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 719,
+        "response_tokens": 16,
+        "total_tokens": 735
+      }
+    },
+    {
+      "conversation_id": "conv09_mixed_preference_and_knowledge",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Toi thich do an cay.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 8,
+        "response_tokens": 18,
+        "total_tokens": 26
+      }
+    },
+    {
+      "conversation_id": "conv09_mixed_preference_and_knowledge",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Ban nho khau vi cua minh khong?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "do an cay"
+      ],
+      "route": "long_term",
+      "memory_hit": true,
+      "response": "Xin lỗi, mình không có thông tin về khẩu vị của bạn. Bạn có thể chia sẻ thêm không?",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 726,
+        "response_tokens": 22,
+        "total_tokens": 748
+      }
+    },
+    {
+      "conversation_id": "conv09_mixed_preference_and_knowledge",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Ban nho khau vi cua minh khong?",
+      "expected_route": "long_term",
+      "expected_keywords": [
+        "do an cay"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 11,
+        "response_tokens": 27,
+        "total_tokens": 38
+      }
+    },
+    {
+      "conversation_id": "conv09_mixed_preference_and_knowledge",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Theo kien thuc cua ban, response relevance do gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "cau tra loi",
+        "keyword"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Response relevance đánh giá mức độ câu trả lời khớp với ý định và từ khóa mong đợi của người dùng.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 457,
+        "response_tokens": 25,
+        "total_tokens": 482
+      }
+    },
+    {
+      "conversation_id": "conv09_mixed_preference_and_knowledge",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Theo kien thuc cua ban, response relevance do gi?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "cau tra loi",
+        "keyword"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 12,
+        "response_tokens": 27,
+        "total_tokens": 39
+      }
+    },
+    {
+      "conversation_id": "conv10_dynamic_semantic_and_episodic",
+      "turn_index": 1,
+      "model": "with_memory",
+      "query": "Ghi nho kien thuc: Multi-memory agent can router de chon backend phu hop.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Multi-memory agent có thể sử dụng router để chọn backend phù hợp dựa trên intent của truy vấn, như long-term, episodic hoặc semantic.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 476,
+        "response_tokens": 30,
+        "total_tokens": 506
+      }
+    },
+    {
+      "conversation_id": "conv10_dynamic_semantic_and_episodic",
+      "turn_index": 1,
+      "model": "without_memory",
+      "query": "Ghi nho kien thuc: Multi-memory agent can router de chon backend phu hop.",
+      "expected_route": "",
+      "expected_keywords": [],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình đã nhận thông tin, nhưng baseline mode sẽ không ghi nhớ cho lượt sau.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 21,
+        "response_tokens": 18,
+        "total_tokens": 39
+      }
+    },
+    {
+      "conversation_id": "conv10_dynamic_semantic_and_episodic",
+      "turn_index": 2,
+      "model": "with_memory",
+      "query": "Router co vai tro gi trong multi-memory agent?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "chon backend",
+        "intent"
+      ],
+      "route": "semantic",
+      "memory_hit": true,
+      "response": "Router trong multi-memory agent có vai trò phân tích intent của truy vấn để chọn backend phù hợp, như long-term, episodic hoặc semantic memory. Nó giúp tối ưu hóa quá trình truy xuất thông tin và đảm bảo rằng các yêu cầu được xử lý hiệu quả.",
+      "matched_keywords": 1,
+      "relevance": 0.5,
+      "token_usage": {
+        "prompt_tokens": 470,
+        "response_tokens": 54,
+        "total_tokens": 524
+      }
+    },
+    {
+      "conversation_id": "conv10_dynamic_semantic_and_episodic",
+      "turn_index": 2,
+      "model": "without_memory",
+      "query": "Router co vai tro gi trong multi-memory agent?",
+      "expected_route": "semantic",
+      "expected_keywords": [
+        "chon backend",
+        "intent"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 0,
+      "relevance": 0.0,
+      "token_usage": {
+        "prompt_tokens": 10,
+        "response_tokens": 27,
+        "total_tokens": 37
+      }
+    },
+    {
+      "conversation_id": "conv10_dynamic_semantic_and_episodic",
+      "turn_index": 3,
+      "model": "with_memory",
+      "query": "Luc nay minh da yeu cau ghi nho dieu gi?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "router",
+        "backend"
+      ],
+      "route": "episodic",
+      "memory_hit": true,
+      "response": "Bạn đã yêu cầu ghi nhớ kiến thức rằng \"Multi-memory agent có router để chọn backend phù hợp.\"",
+      "matched_keywords": 2,
+      "relevance": 1.0,
+      "token_usage": {
+        "prompt_tokens": 465,
+        "response_tokens": 21,
+        "total_tokens": 486
+      }
+    },
+    {
+      "conversation_id": "conv10_dynamic_semantic_and_episodic",
+      "turn_index": 3,
+      "model": "without_memory",
+      "query": "Luc nay minh da yeu cau ghi nho dieu gi?",
+      "expected_route": "episodic",
+      "expected_keywords": [
+        "router",
+        "backend"
+      ],
+      "route": "short_term",
+      "memory_hit": false,
+      "response": "Mình không dùng memory backend trong chế độ baseline, nên chỉ có thể phản hồi chung và cần thêm ngữ cảnh trực tiếp.",
+      "matched_keywords": 1,
+      "relevance": 0.5,
+      "token_usage": {
+        "prompt_tokens": 13,
+        "response_tokens": 27,
+        "total_tokens": 40
+      }
+    }
+  ]
+}

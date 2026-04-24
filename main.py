@@ -8,6 +8,9 @@ from typing import Any, Dict
 from agent import AgentNodes, MemoryRouter, MultiMemoryAgent
 from benchmark import run_benchmark
 from memory import EpisodicMemory, LongTermMemory, SemanticMemory, ShortTermMemory
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def build_memory_agent(token_limit: int = 900) -> MultiMemoryAgent:

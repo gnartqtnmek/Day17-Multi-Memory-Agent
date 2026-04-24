@@ -1,0 +1,482 @@
+[
+  {
+    "timestamp": "2026-04-24T13:10:05.876221+00:00",
+    "user_id": "memory_conv01_preference_drink",
+    "query": "Toi thich ca phe arabica va tra sen.",
+    "response": "Toi thich ca phe arabica va tra sen.",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": false,
+      "token_usage": {
+        "prompt_tokens": 226,
+        "response_tokens": 50,
+        "total_tokens": 276
+      },
+      "route_reason": "matched:t[ôo]i\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:08.099064+00:00",
+    "user_id": "memory_conv01_preference_drink",
+    "query": "Ban nho so thich do uong cua minh khong?",
+    "response": "Ban nho so thich do uong cua minh khong?",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 258,
+        "response_tokens": 11,
+        "total_tokens": 269
+      },
+      "route_reason": "matched:s[ởo]\\s+th[íi]ch, matched:b[ạa]n\\s+nh[ớo]"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:11.505404+00:00",
+    "user_id": "memory_conv01_preference_drink",
+    "query": "Goi y nhanh dua tren so thich do.",
+    "response": "Goi y nhanh dua tren so thich do.",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 284,
+        "response_tokens": 53,
+        "total_tokens": 337
+      },
+      "route_reason": "matched:s[ởo]\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:14.036325+00:00",
+    "user_id": "memory_conv02_preference_tech",
+    "query": "Minh thich LangGraph va Python.",
+    "response": "Minh thich LangGraph va Python.",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": false,
+      "token_usage": {
+        "prompt_tokens": 300,
+        "response_tokens": 21,
+        "total_tokens": 321
+      },
+      "route_reason": "matched:m[ìi]nh\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:21.414916+00:00",
+    "user_id": "memory_conv02_preference_tech",
+    "query": "So thich cong nghe cua toi la gi?",
+    "response": "So thich cong nghe cua toi la gi?",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 326,
+        "response_tokens": 13,
+        "total_tokens": 339
+      },
+      "route_reason": "matched:s[ởo]\\s+th[íi]ch, matched:l[àa]\\s+g[ìi]"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:23.048286+00:00",
+    "user_id": "memory_conv02_preference_tech",
+    "query": "Ban nho minh thich framework nao?",
+    "response": "Ban nho minh thich framework nao?",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 354,
+        "response_tokens": 6,
+        "total_tokens": 360
+      },
+      "route_reason": "matched:b[ạa]n\\s+nh[ớo], matched:m[ìi]nh\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:30.561282+00:00",
+    "user_id": "memory_conv03_episodic_learning_plan",
+    "query": "Tuan nay minh muon hoc Redis co ban.",
+    "response": "Tuan nay minh muon hoc Redis co ban.",
+    "route": "short_term",
+    "metadata": {
+      "memory_hit": false,
+      "token_usage": {
+        "prompt_tokens": 370,
+        "response_tokens": 229,
+        "total_tokens": 599
+      },
+      "route_reason": "fallback:default_short_term"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:32.072892+00:00",
+    "user_id": "memory_conv03_episodic_learning_plan",
+    "query": "Hay nhac lai minh vua noi muon hoc gi.",
+    "response": "Hay nhac lai minh vua noi muon hoc gi.",
+    "route": "episodic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 430,
+        "response_tokens": 13,
+        "total_tokens": 443
+      },
+      "route_reason": "matched:v[ừu]a\\s+n[óo]i"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:34.037719+00:00",
+    "user_id": "memory_conv03_episodic_learning_plan",
+    "query": "Luc nay toi de cap thoi gian nao?",
+    "response": "Luc nay toi de cap thoi gian nao?",
+    "route": "episodic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 454,
+        "response_tokens": 11,
+        "total_tokens": 465
+      },
+      "route_reason": "matched:l[úu]c\\s+n[ãa]y"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:37.794186+00:00",
+    "user_id": "memory_conv04_semantic_general_knowledge",
+    "query": "Ha Noi la thu do cua nuoc nao?",
+    "response": "Ha Noi la thu do cua nuoc nao?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 515,
+        "response_tokens": 10,
+        "total_tokens": 525
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:39.644648+00:00",
+    "user_id": "memory_conv04_semantic_general_knowledge",
+    "query": "LangGraph dung de lam gi?",
+    "response": "LangGraph dung de lam gi?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 540,
+        "response_tokens": 17,
+        "total_tokens": 557
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:42.303017+00:00",
+    "user_id": "memory_conv04_semantic_general_knowledge",
+    "query": "Chroma co vai tro gi?",
+    "response": "Chroma co vai tro gi?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 576,
+        "response_tokens": 20,
+        "total_tokens": 596
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:45.681097+00:00",
+    "user_id": "memory_conv05_semantic_benchmark_terms",
+    "query": "Giai thich context window management la gi.",
+    "response": "Giai thich context window management la gi.",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 596,
+        "response_tokens": 84,
+        "total_tokens": 680
+      },
+      "route_reason": "matched:l[àa]\\s+g[ìi]"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:48.239112+00:00",
+    "user_id": "memory_conv05_semantic_benchmark_terms",
+    "query": "Token budget breakdown thuong gom nhung gi?",
+    "response": "Token budget breakdown thuong gom nhung gi?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 624,
+        "response_tokens": 52,
+        "total_tokens": 676
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:50.408953+00:00",
+    "user_id": "memory_conv05_semantic_benchmark_terms",
+    "query": "Response relevance dung de do dieu gi?",
+    "response": "Response relevance dung de do dieu gi?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 642,
+        "response_tokens": 51,
+        "total_tokens": 693
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:52.879392+00:00",
+    "user_id": "memory_conv06_preference_activity",
+    "query": "Toi thich chay bo buoi sang.",
+    "response": "Toi thich chay bo buoi sang.",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": false,
+      "token_usage": {
+        "prompt_tokens": 583,
+        "response_tokens": 39,
+        "total_tokens": 622
+      },
+      "route_reason": "matched:t[ôo]i\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:54.385407+00:00",
+    "user_id": "memory_conv06_preference_activity",
+    "query": "Ban nho minh thich hoat dong nao?",
+    "response": "Ban nho minh thich hoat dong nao?",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 621,
+        "response_tokens": 11,
+        "total_tokens": 632
+      },
+      "route_reason": "matched:b[ạa]n\\s+nh[ớo], matched:m[ìi]nh\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:56.675912+00:00",
+    "user_id": "memory_conv06_preference_activity",
+    "query": "Nhac lai so thich do giup minh.",
+    "response": "Nhac lai so thich do giup minh.",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 647,
+        "response_tokens": 26,
+        "total_tokens": 673
+      },
+      "route_reason": "matched:s[ởo]\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:10:59.199017+00:00",
+    "user_id": "memory_conv07_episodic_goal_tracking",
+    "query": "Muc tieu hom nay cua minh la hoan thanh bao cao benchmark.",
+    "response": "Muc tieu hom nay cua minh la hoan thanh bao cao benchmark.",
+    "route": "short_term",
+    "metadata": {
+      "memory_hit": false,
+      "token_usage": {
+        "prompt_tokens": 671,
+        "response_tokens": 31,
+        "total_tokens": 702
+      },
+      "route_reason": "fallback:default_short_term"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:01.341085+00:00",
+    "user_id": "memory_conv07_episodic_goal_tracking",
+    "query": "Ban vua nghe minh noi muc tieu gi?",
+    "response": "Ban vua nghe minh noi muc tieu gi?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 761,
+        "response_tokens": 14,
+        "total_tokens": 775
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:03.296402+00:00",
+    "user_id": "memory_conv07_episodic_goal_tracking",
+    "query": "Luc nay minh co nhac den benchmark dung khong?",
+    "response": "Luc nay minh co nhac den benchmark dung khong?",
+    "route": "episodic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 441,
+        "response_tokens": 18,
+        "total_tokens": 459
+      },
+      "route_reason": "matched:l[úu]c\\s+n[ãa]y"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:05.533754+00:00",
+    "user_id": "memory_conv08_semantic_memory_stack",
+    "query": "Redis phu hop cho muc dich gi trong agent memory?",
+    "response": "Redis phu hop cho muc dich gi trong agent memory?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 471,
+        "response_tokens": 48,
+        "total_tokens": 519
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:08.727244+00:00",
+    "user_id": "memory_conv08_semantic_memory_stack",
+    "query": "Short-term memory trong lab nay dung cong cu nao?",
+    "response": "Short-term memory trong lab nay dung cong cu nao?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 472,
+        "response_tokens": 15,
+        "total_tokens": 487
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:11.081346+00:00",
+    "user_id": "memory_conv08_semantic_memory_stack",
+    "query": "Episodic memory duoc luu o dau?",
+    "response": "Episodic memory duoc luu o dau?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 469,
+        "response_tokens": 17,
+        "total_tokens": 486
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:13.272437+00:00",
+    "user_id": "memory_conv09_mixed_preference_and_knowledge",
+    "query": "Toi thich do an cay.",
+    "response": "Toi thich do an cay.",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": false,
+      "token_usage": {
+        "prompt_tokens": 719,
+        "response_tokens": 16,
+        "total_tokens": 735
+      },
+      "route_reason": "matched:t[ôo]i\\s+th[íi]ch"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:14.861256+00:00",
+    "user_id": "memory_conv09_mixed_preference_and_knowledge",
+    "query": "Ban nho khau vi cua minh khong?",
+    "response": "Ban nho khau vi cua minh khong?",
+    "route": "long_term",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 726,
+        "response_tokens": 22,
+        "total_tokens": 748
+      },
+      "route_reason": "matched:b[ạa]n\\s+nh[ớo]"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:17.777351+00:00",
+    "user_id": "memory_conv09_mixed_preference_and_knowledge",
+    "query": "Theo kien thuc cua ban, response relevance do gi?",
+    "response": "Theo kien thuc cua ban, response relevance do gi?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 457,
+        "response_tokens": 25,
+        "total_tokens": 482
+      },
+      "route_reason": "matched:ki[ếe]n\\s+th[ứu]c"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:21.877195+00:00",
+    "user_id": "memory_conv10_dynamic_semantic_and_episodic",
+    "query": "Ghi nho kien thuc: Multi-memory agent can router de chon backend phu hop.",
+    "response": "Ghi nho kien thuc: Multi-memory agent can router de chon backend phu hop.",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 476,
+        "response_tokens": 30,
+        "total_tokens": 506
+      },
+      "route_reason": "matched:ki[ếe]n\\s+th[ứu]c"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:24.278455+00:00",
+    "user_id": "memory_conv10_dynamic_semantic_and_episodic",
+    "query": "Router co vai tro gi trong multi-memory agent?",
+    "response": "Router co vai tro gi trong multi-memory agent?",
+    "route": "semantic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 470,
+        "response_tokens": 54,
+        "total_tokens": 524
+      },
+      "route_reason": "fallback:question_form"
+    }
+  },
+  {
+    "timestamp": "2026-04-24T13:11:25.837757+00:00",
+    "user_id": "memory_conv10_dynamic_semantic_and_episodic",
+    "query": "Luc nay minh da yeu cau ghi nho dieu gi?",
+    "response": "Luc nay minh da yeu cau ghi nho dieu gi?",
+    "route": "episodic",
+    "metadata": {
+      "memory_hit": true,
+      "token_usage": {
+        "prompt_tokens": 465,
+        "response_tokens": 21,
+        "total_tokens": 486
+      },
+      "route_reason": "matched:l[úu]c\\s+n[ãa]y"
+    }
+  }
+]
